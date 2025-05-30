@@ -10,16 +10,16 @@ public class Clientservice {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    private static final String USUARIO_SERVICE_BASE_URL = "http://192.168.56.1:8081/api/usuarios";
-    private static final String CLASE_SERVICE_BASE_URL = "http://192.168.56.1:8080/api/clases";
+    private static final String USUARIO_SERVICE_URL = "http://192.168.1.8:8081/api/usuarios/";
+    private static final String CLASE_SERVICE_URL = "http://192.168.1.8:8080/api/clases/";
 
     public Map<String, String> getUsuarioDetails(String usuarioId) {
-        String url = USUARIO_SERVICE_BASE_URL + usuarioId;
+        String url = USUARIO_SERVICE_URL + usuarioId;
         return restTemplate.getForObject(url, Map.class);
     }
 
     public Map<String, String> getClaseDetails(String claseId) {
-        String url = CLASE_SERVICE_BASE_URL + claseId;
+        String url = CLASE_SERVICE_URL + claseId;
         return restTemplate.getForObject(url, Map.class);
     }
 }
