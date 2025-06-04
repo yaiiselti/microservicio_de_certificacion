@@ -11,11 +11,9 @@ public interface certificacionrepository extends JpaRepository<Certificacion, In
     
     List<Certificacion> findByUsuarioid(String usuarioid);
 
-
     Optional<Certificacion> findByIdAndUsuarioid(int id, String usuarioid);
 
-
-    List<Certificacion> findByClaseid(String claseid); // ¡Nuevo método!
+    List<Certificacion> findByClaseid(String claseid);
 
     Optional<Certificacion> findByIdAndClaseid(int id, String claseid);
 }

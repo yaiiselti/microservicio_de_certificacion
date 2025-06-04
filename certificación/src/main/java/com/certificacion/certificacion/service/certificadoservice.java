@@ -1,34 +1,45 @@
 package com.certificacion.certificacion.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-
+import org.springframework.stereotype.Service;
 
 import com.certificacion.certificacion.model.Certificacion;
-
-
 import com.certificacion.certificacion.repository.certificacionrepository;
-
-import org.springframework.stereotype.Service;
 
 @Service
 public class certificadoservice {
 
     private final certificacionrepository certificacionRepository;
+    private final Map<String, String> classIdToTitleMap;
 
     public certificadoservice(certificacionrepository certificacionRepository) {
         this.certificacionRepository = certificacionRepository;
+
+        this.classIdToTitleMap = new HashMap<>();
+        classIdToTitleMap.put("CLASE001", "Introducción a la Programación");
+        classIdToTitleMap.put("CLASE002", "Algoritmos y Estructuras de Datos");
+        classIdToTitleMap.put("CLASE003", "Desarrollo Web con Spring Boot");
+        classIdToTitleMap.put("CLASE004", "Bases de Datos Relacionales");
+ 
     }
+
+
+    public String getTituloCursoByClaseId(String claseid) {
+        return classIdToTitleMap.get(claseid);
+    }
+
 
     public Certificacion emitirCertificado(String usuarioid, String claseid) {
         Certificacion nuevaCertificacion = new Certificacion();
         nuevaCertificacion.setUsuarioid(usuarioid);
         nuevaCertificacion.setClaseid(claseid);
         nuevaCertificacion.setEstado("EMITIDO");
-     
 
-        nuevaCertificacion.setMetadatosAdicionales(null); 
+        nuevaCertificacion.setMetadatosAdicionales(null);
         nuevaCertificacion.setUrlarchivo(null);
         return certificacionRepository.save(nuevaCertificacion);
     }
